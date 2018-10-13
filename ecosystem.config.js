@@ -1,6 +1,6 @@
 module.exports = {
   apps: [{
-    name: "Express Service 1",
+    name: "Express Service Gateway",
     script: "npm start"
   }],
   deploy: {
