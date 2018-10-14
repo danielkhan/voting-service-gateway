@@ -16,6 +16,9 @@ const appzip = require('appmetrics-zipkin')({
   sampleRate: 1.0
 });
 
+
+
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
