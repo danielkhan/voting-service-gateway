@@ -9,6 +9,7 @@ router.get('/', async (req, res, next) => {
     res.render('index', { title: 'Express' });
   } catch (err) {
     console.log(err);
+    return res.status(500);
   }
 
 });
