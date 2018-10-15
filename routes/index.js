@@ -8,19 +8,18 @@ let toggle = false;
 router.get('/', (req, res, next) => {
   try {
     if(!toggle) {
-      sa.get('http://localhost:3010', (err, res) => {
+      sa.get('http://localhost:3010', (e, r) => {
         res.render('index', { title: 'Express 1' });
       });
       toggle = true;
     } else {
-      sa.get('http://localhost:3020', (err, res) => {
+      sa.get('http://localhost:3020', (e, r) => {
         res.render('index', { title: 'Express 2' });
       });
       toggle = false;
     }
   } catch (err) {
-    console.log(err);
-    return res.status(500).end();
+    return next(err);
   }
 });
 
