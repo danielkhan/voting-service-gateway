@@ -1,24 +1,27 @@
 const express = require('express');
 const router = express.Router();
 const axios = require('axios');
+const sa = require('superagent');
+
 let toggle = false;
-/* GET home page. */
-router.get('/', async (req, res, next) => {
+
+router.get('/', (req, res, next) => {
   try {
     if(!toggle) {
-      await axios.get('http://localhost:3010');
+      sa.get('http://localhost:3010', (err, res) => {
+        res.render('index', { title: 'Express 1' });
+      });
       toggle = true;
     } else {
-      await axios.get('http://localhost:3020');
+      sa.get('http://localhost:3020', (err, res) => {
+        res.render('index', { title: 'Express 2' });
+      });
       toggle = false;
     }
-    
-    res.render('index', { title: 'Express' });
   } catch (err) {
     console.log(err);
     return res.status(500).end();
   }
-
 });
 
 module.exports = router;
