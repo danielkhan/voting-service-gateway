@@ -1,11 +1,3 @@
-const appzip = require('appmetrics-zipkin')({
-  host: 'localhost',
-  port: 9411,
-  serviceName:'voting-service-gateway',
-  sampleRate: 1.0
-});
-
-
 const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
