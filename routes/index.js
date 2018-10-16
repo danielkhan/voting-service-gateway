@@ -10,7 +10,7 @@ router.get('/', (req, res, next) => {
     request.get(`http://localhost:3010?choice=${req.query.choice}`, (e, r) => {
       if (e) return next(e);
       if(r.statusCode > 299) {
-        return res.status(r.statusCode).end();
+        return res.status(r.statusCode).json({error: 'Something went wrong!'});
       }
       return res.json(JSON.parse(r.body));
     });
@@ -20,7 +20,7 @@ router.get('/', (req, res, next) => {
     request.get(`http://localhost:3020?choice=${req.query.choice}`, (e, r) => {
       if (e) return next(e);
       if(r.statusCode > 299) {
-        return res.status(r.statusCode).end();
+        return res.status(r.statusCode).json({error: 'Something went wrong!'});
       }
       return res.json(JSON.parse(r.body));
     });
