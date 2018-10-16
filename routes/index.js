@@ -9,6 +9,9 @@ router.get('/', (req, res, next) => {
 
     request.get(`http://localhost:3010?choice=${req.query.choice}`, (e, r) => {
       if (e) return next(e);
+      if(r.statusCode > 299) {
+        return res.status(r.statusCode).end();
+      }
       return res.json(JSON.parse(r.body));
     });
     toggle = true;
@@ -16,7 +19,9 @@ router.get('/', (req, res, next) => {
   } else {
     request.get(`http://localhost:3020?choice=${req.query.choice}`, (e, r) => {
       if (e) return next(e);
-      console.log(r);
+      if(r.statusCode > 299) {
+        return res.status(r.statusCode).end();
+      }
       return res.json(JSON.parse(r.body));
     });
   }
