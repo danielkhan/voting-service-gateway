@@ -1,18 +1,20 @@
 const express = require('express');
 const router = express.Router();
 const axios = require('axios');
-const sa = require('superagent');
+const request = require('request');
 let toggle = false;
 
 router.get('/', (req, res, next) => {
   if (!toggle) {
-    sa.get('http://localhost:3010', (e, r) => {
+
+    request.get(`http://localhost:3010?choice=${req.query.choice}`, (e, r) => {
       if (e) return next(e);
+      return res.json(JSON.parse(r.body));
     });
-    toggle = true;
-    return res.render('index', { title: 'Express 1' });
+    // toggle = true;
+    
   } else {
-    sa.get('http://localhost:3020', (e, r) => {
+    request.get(`http://localhost:3020?choice=${req.query.choice}`, (e, r) => {
       if (e) return next(e);
     });
     toggle = false;
