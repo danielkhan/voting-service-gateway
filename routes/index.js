@@ -16,6 +16,7 @@ router.get('/', (req, res, next) => {
   } else {
     request.get(`http://localhost:3020?choice=${req.query.choice}`, (e, r) => {
       if (e) return next(e);
+      console.log(r);
       return res.json(JSON.parse(r.body));
     });
   }
