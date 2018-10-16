@@ -11,14 +11,13 @@ router.get('/', (req, res, next) => {
       if (e) return next(e);
       return res.json(JSON.parse(r.body));
     });
-    // toggle = true;
+    toggle = true;
     
   } else {
     request.get(`http://localhost:3020?choice=${req.query.choice}`, (e, r) => {
       if (e) return next(e);
+      return res.json(JSON.parse(r.body));
     });
-    toggle = false;
-    return res.render('index', { title: 'Express 2' });
   }
 });
 
