@@ -17,6 +17,7 @@
     "request": "^2.88.0",
     "superagent": "^4.0.0-beta.5",
     "zipkin": "^0.14.2",
+    "zipkin-context-cls": "^0.14.2",
     "zipkin-instrumentation-express": "^0.14.2"
   }
 }

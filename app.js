@@ -5,11 +5,11 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
 const indexRouter = require('./routes/index');
-const zipkinMiddleware = require('./agent/zipkin');
+const zipkin = require('./agent/zipkin');
 
 const app = express();
 
-// app.use(zipkinMiddleware('service-gateway'));
+app.use(zipkin.middleware('service-gateway'));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -20,7 +20,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use('/', indexRouter);
+app.use('/', indexRouter(zipkin));
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
