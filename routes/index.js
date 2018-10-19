@@ -7,9 +7,15 @@ let toggle = 0;
 router.get('/', (req, res, next) => {
   if (toggle < 3) {
     request.get(`http://localhost:3010?choice=${req.query.choice}`, (e, r) => {
-      if (e) return next(e);
+      if (e) {
+        console.log('XXXXXXXX')
+        console.log(e);
+        return next(e);
+      }
       if(r.statusCode > 299) {
         toggle++;
+        console.log('YYYYYYYYYYYYYYY')
+        console.log(r.statusCode);
         return res.status(r.statusCode).json({error: 'Something went wrong!'});
       }
       toggle++;
