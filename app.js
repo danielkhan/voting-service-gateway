@@ -9,7 +9,7 @@ const zipkinMiddleware = require('./agent/zipkin');
 
 const app = express();
 
-app.use(zipkinMiddleware('service-gateway'));
+// app.use(zipkinMiddleware('service-gateway'));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
