@@ -6,9 +6,13 @@ let toggle = 0;
 
 
 module.exports = (zipkin) => {
+
+  const rgreen = zipkin.request('service-green');
+  const rblue = zipkin.request('service-green');
+
   router.get('/', (req, res, next) => {
     if (toggle < 3) {
-      zipkin.request('service-green').get(`http://localhost:3010?choice=${req.query.choice}`, (e, r) => {
+      rgreen.get(`http://localhost:3010?choice=${req.query.choice}`, (e, r) => {
         if (e) {
           return next(e);
         }
@@ -21,7 +25,7 @@ module.exports = (zipkin) => {
       });
     } else {
       toggle = 0;
-      zipkin.request('service-blue').get(`http://localhost:3020?choice=${req.query.choice}`, (e, r) => {
+      rblue.get(`http://localhost:3020?choice=${req.query.choice}`, (e, r) => {
         if (e) return next(e);
         if(r.statusCode > 299) {
           return res.status(r.statusCode).json({error: 'Something went wrong!'});
