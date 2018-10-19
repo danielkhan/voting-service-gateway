@@ -5,6 +5,7 @@ const request = require('request');
 let toggle = 0;
 
 router.get('/', (req, res, next) => {
+  console.log(toggle);
   if (toggle % 3 !== 0) {
     request.get(`http://localhost:3010?choice=${req.query.choice}`, (e, r) => {
       if (e) return next(e);
