@@ -8,7 +8,7 @@ let toggle = 0;
 module.exports = (zipkin) => {
 
   const rgreen = zipkin.request('service-green');
-  const rblue = zipkin.request('service-green');
+  const rblue = zipkin.request('service-blue');
 
   router.get('/', (req, res, next) => {
     if (toggle < 3) {
