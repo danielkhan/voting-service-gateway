@@ -5,8 +5,7 @@ const request = require('request');
 let toggle = 0;
 
 router.get('/', (req, res, next) => {
-  console.log(toggle);
-  if (toggle % 3 !== 0) {
+  if (toggle < 3) {
     request.get(`http://localhost:3010?choice=${req.query.choice}`, (e, r) => {
       if (e) return next(e);
       if(r.statusCode > 299) {
@@ -17,13 +16,12 @@ router.get('/', (req, res, next) => {
       return res.json(JSON.parse(r.body));
     });
   } else {
+    toggle = 0;
     request.get(`http://localhost:3020?choice=${req.query.choice}`, (e, r) => {
       if (e) return next(e);
       if(r.statusCode > 299) {
-        toggle++;
         return res.status(r.statusCode).json({error: 'Something went wrong!'});
       }
-      toggle++;
       return res.json(JSON.parse(r.body));
     });
   }
