@@ -5,11 +5,11 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
 const indexRouter = require('./routes/index');
-const zipkin = require('./agent/zipkin');
+const zipkin = require('./agent/zipkin')('service-gateway');
 
 const app = express();
 
-app.use(zipkin.middleware('service-gateway'));
+app.use(zipkin.middleware());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
