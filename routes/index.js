@@ -10,6 +10,7 @@ router.get('/', (req, res, next) => {
     request.get(`http://localhost:3010?choice=${req.query.choice}`, (e, r) => {
       if (e) return next(e);
       if(r.statusCode > 299) {
+        toggle++;
         return res.status(r.statusCode).json({error: 'Something went wrong!'});
       }
       toggle++;
@@ -19,6 +20,7 @@ router.get('/', (req, res, next) => {
     request.get(`http://localhost:3020?choice=${req.query.choice}`, (e, r) => {
       if (e) return next(e);
       if(r.statusCode > 299) {
+        toggle++;
         return res.status(r.statusCode).json({error: 'Something went wrong!'});
       }
       toggle++;
