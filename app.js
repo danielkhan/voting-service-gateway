@@ -1,3 +1,5 @@
+const zipkin = require('./agent/zipkin')('service-gateway');
+
 const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
@@ -5,7 +7,7 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
 const indexRouter = require('./routes/index');
-const zipkin = require('./agent/zipkin')('service-gateway');
+
 
 const app = express();
 
