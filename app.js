@@ -1,4 +1,4 @@
-const zipkin = require('./agent/zipkin')('service-gateway');
+// // const zipkin = require('./agent/zipkin')('service-gateway');
 
 const createError = require('http-errors');
 const express = require('express');
@@ -11,7 +11,7 @@ const indexRouter = require('./routes/index');
 
 const app = express();
 
-app.use(zipkin.middleware());
+// app.use(zipkin.middleware());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -22,7 +22,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use('/', indexRouter(zipkin));
+app.use('/', indexRouter());
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
