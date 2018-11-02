@@ -10,6 +10,7 @@ module.exports = () => {
 
 
   router.get('/', (req, res, next) => {
+    console.log(req.headers);
     if (1==1 || toggle < 3) {
       request.get(`http://localhost:3010?choice=${req.query.choice}`, (e, r) => {
         if (e) {
