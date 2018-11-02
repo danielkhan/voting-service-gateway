@@ -1,5 +1,6 @@
 // // const zipkin = require('./agent/zipkin')('service-gateway');
 const initTracer = require('jaeger-client').initTracer;
+const Tracer = require('@risingstack/jaeger')
 
 const PrometheusMetricsFactory = require('jaeger-client').PrometheusMetricsFactory;
 const promClient = require('prom-client');
@@ -16,7 +17,7 @@ const options = {
   metrics,
   // logger: logger,
 };
-const tracer = initTracer(config, options);
+const tracer = new Tracer(config, options);
 
 const createError = require('http-errors');
 const express = require('express');
