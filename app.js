@@ -6,10 +6,10 @@ const PrometheusMetricsFactory = require('jaeger-client').PrometheusMetricsFacto
 const promClient = require('prom-client');
 
 const config = {
-  serviceName: 'service_gateway',
+  serviceName: 'service-gateway',
 };
 const namespace = config.serviceName;
-const metrics = new PrometheusMetricsFactory(promClient, namespace);
+const metrics = new PrometheusMetricsFactory(promClient, 'service_gateway');
 const options = {
   tags: {
     'service-gateway.version': '1.0.2',
