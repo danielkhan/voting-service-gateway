@@ -1,8 +1,10 @@
 // // const zipkin = require('./agent/zipkin')('service-gateway');
 const initTracer = require('jaeger-client').initTracer;
 const Tracer = require('@risingstack/jaeger')
+const opentracing = require('opentracing');
 
 const PrometheusMetricsFactory = require('jaeger-client').PrometheusMetricsFactory;
+const ZipkinB3TextMapCodec = require('jaeger-client').ZipkinB3TextMapCodec;
 const promClient = require('prom-client');
 
 const config = {
@@ -17,7 +19,12 @@ const options = {
   metrics,
   // logger: logger,
 };
-const tracer = new Tracer(config, options);
+// const tracer = new Tracer(config, options);
+const tracer = initTracer(config, options);
+const codec = new ZipkinB3TextMapCodec({ urlEncoding: true });
+
+tracer.registerInjector(opentracing.FORMAT_HTTP_HEADERS, codec);
+tracer.registerExtractor(opentracing.FORMAT_HTTP_HEADERS, codec);
 
 const createError = require('http-errors');
 const express = require('express');
@@ -41,7 +48,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use('/', indexRouter());
+app.use('/', indexRouter(tracer));
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
