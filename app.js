@@ -3,7 +3,6 @@ const initTracer = require('jaeger-client').initTracer;
 const Tracer = require('@risingstack/jaeger')
 
 const PrometheusMetricsFactory = require('jaeger-client').PrometheusMetricsFactory;
-const ZipkinB3TextMapCodec = require('jaeger-client').ZipkinB3TextMapCodec;
 const promClient = require('prom-client');
 
 const config = {
@@ -18,10 +17,7 @@ const options = {
   metrics,
   // logger: logger,
 };
-let codec = new ZipkinB3TextMapCodec({ urlEncoding: true });
 const tracer = new Tracer(config, options);
-tracer.registerInjector(opentracing.FORMAT_HTTP_HEADERS, codec);
-tracer.registerExtractor(opentracing.FORMAT_HTTP_HEADERS, codec);
 
 const createError = require('http-errors');
 const express = require('express');
