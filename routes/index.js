@@ -11,7 +11,7 @@ module.exports = (zipkin) => {
   const rblue = zipkin.request('service-blue');
 
   router.get('/', (req, res, next) => {
-    if (1==1 || toggle < 3) {
+    if (toggle < 3) {
       rgreen.get(`http://localhost:3010?choice=${req.query.choice}`, (e, r) => {
         if (e) {
           return next(e);
