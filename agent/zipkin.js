@@ -9,7 +9,7 @@ const zipkinMiddleware = require('zipkin-instrumentation-express').expressMiddle
 const wrapRequest = require('zipkin-instrumentation-request');
 const request = require('request');
 const CLSContext = require('zipkin-context-cls');
-const localServiceName = 'express-frontend';
+
 const { HttpLogger } = require('zipkin-transport-http');
 
 module.exports = (localServiceName) => {
