@@ -7,6 +7,10 @@ const appzip = require('appmetrics-zipkin')({
   sampleRate: 1.0
 });
 */
+
+const tracer = require('dd-trace').init({
+  analytics: true
+});
 const app = require('../app');
 const debug = require('debug')('service-1:server');
 const http = require('http');
