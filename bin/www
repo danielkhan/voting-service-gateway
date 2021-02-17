@@ -3,9 +3,6 @@
 const tracing = require("../agent/tracing");
 tracing.init("service-gateway");
 
-const tracer = tracing.getTracer("service-gateway");
-tracing.enableConsoleExporter();
-tracing.enableJaegerExporter();
 const app = require("../app");
 const debug = require("debug")("service-1:server");
 const http = require("http");
