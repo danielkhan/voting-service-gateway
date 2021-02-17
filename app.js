@@ -1,10 +1,3 @@
-const tracing = require("./agent/tracing");
-tracing.init("service-gateway");
-
-const tracer = tracing.getTracer("service-gateway");
-tracing.enableConsoleExporter();
-tracing.enableJaegerExporter();
-
 const createError = require("http-errors");
 const express = require("express");
 const path = require("path");
